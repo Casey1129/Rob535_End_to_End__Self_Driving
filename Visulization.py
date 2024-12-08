@@ -39,7 +39,7 @@ def keras_process_image(img):
     return img
 
 # Load the steering wheel image and initialize variables
-steer = cv2.imread('resources/steering_wheel_image.jpg', 0)  # Load as grayscale
+steer = cv2.imread('resources/steering_wheel.jpg', 0)  # Load as grayscale
 rows, cols = steer.shape
 smoothed_angle = 0
 

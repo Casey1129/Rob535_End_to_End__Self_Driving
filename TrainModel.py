@@ -51,7 +51,7 @@ def keras_model(training_data):
     model.compile(optimizer=Adam(learning_rate=0.0001), loss="mse")
 
     # Define checkpoint callback to save the best model
-    filepath = "Autopilot.keras"
+    filepath = "model.keras"
     checkpoint1 = ModelCheckpoint(filepath, verbose=1, save_best_only=True)
     callbacks_list = [checkpoint1]
 
@@ -65,7 +65,7 @@ def loadFromPickle():
         features (numpy array): Feature data.
         labels (numpy array): Label data.
     """
-    with open("features_40", "rb") as f:
+    with open("features", "rb") as f:
         features = np.array(pickle.load(f))
     with open("labels", "rb") as f:
         labels = np.array(pickle.load(f))
