@@ -58,8 +58,20 @@ while cap.isOpened():
     steering_angle = keras_predict(model, gray)
     print(f"Predicted Steering Angle: {steering_angle:.2f}")
 
-    # Display the video frame
-    cv2.imshow('frame', cv2.resize(frame, (500, 300), interpolation=cv2.INTER_AREA))
+
+
+    # Upscale the frame for clearer text rendering
+    upscaled_frame = cv2.resize(frame, (1000, 600), interpolation=cv2.INTER_CUBIC)
+
+    # Add text to the upscaled frame
+    cv2.putText(upscaled_frame, f'Steering Angle: {steering_angle:.2f}', (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 4)
+    cv2.putText(upscaled_frame, f'Steering Angle: {steering_angle:.2f}', (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 3)
+
+    # Downscale the frame for display
+    final_frame = cv2.resize(upscaled_frame, (500, 300), interpolation=cv2.INTER_AREA)
+
+    # Display the processed frame
+    cv2.imshow('frame', final_frame)
 
     # Smooth the steering angle for display
     smoothed_angle += 0.2 * pow(abs((steering_angle - smoothed_angle)), 2.0 / 3.0) * (
